@@ -10,6 +10,7 @@ public class Client {
     @Id
     @GeneratedValue
     private long id;
+    private String name;
 
     public Client(){}
 }
