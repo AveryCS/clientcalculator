@@ -1,10 +1,16 @@
 package com.studiofaye.clientcalculator.controller;
 
+import com.studiofaye.clientcalculator.entities.Client;
+import com.studiofaye.clientcalculator.repos.ClientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ClientController {
+    @Autowired
+    private ClientRepository clientRepo;
 
     public ClientController(){}
 
@@ -24,7 +30,23 @@ public class ClientController {
     }
 
     //Update client
-    //@PatchMapping("/updateClientInfo")
+    //Update Hours
+//    @PatchMapping("/updateClientInfo/hours/{id}/")
+//    public ResponseEntity<Client> updateClientHours(@PathVariable long id, int hours){
+//
+//       // Client newClient = database.findById.get()
+//        //newClient.updateHours
+//        //clientRepo.save
+//        // return newClient
+//
+//    }
+
+    //update Revenue
+//    @PatchMapping("/updateClientInfo/yearlyRevenue/{id}/")
+//    public ResponseEntity<Client> updaterevenue(@PathVariable long id, float updatedRevenue){
+//
+//
+//    }
 
     //Search clients by rating
     //@GetMapping(/"searchByRating")

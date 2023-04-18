@@ -11,6 +11,12 @@ public class Client {
     @GeneratedValue
     private long id;
     private String name;
+    private int hours;
+    private float yearlyRevenue;
 
     public Client(){}
+
+    public void updateName(String updatedName){name = updatedName;}
+
+    public void updateHours(int updatedHours){ hours = updatedHours;}
 }
