@@ -20,7 +20,16 @@ public class ClientController {
     }
 
     //Add new client
-//    @PostMapping("/addClient")
+    @PostMapping("/addClient")
+    public Client addClient(@RequestBody Client newClient){
+        System.out.println(newClient);
+       Client tempClient = clientRepo.save(newClient);
+
+      return tempClient;
+
+
+
+    }
 
     //Get current client
     @GetMapping("/getClientInfo/{id}")
@@ -57,6 +66,8 @@ public class ClientController {
 
     //Show list of all clients
     //@GetMapping("/showAllClientInfo")
+
+    //add client
 
 
 

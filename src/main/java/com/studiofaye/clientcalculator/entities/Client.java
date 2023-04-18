@@ -16,6 +16,10 @@ public class Client {
 
     public Client(){}
 
+    public String toString(){
+        return name + " "+ String.valueOf(hours)+ " "+ String.valueOf(yearlyRevenue);
+    }
+
     public void updateName(String updatedName){name = updatedName;}
 
     public void updateHours(int updatedHours){ hours = updatedHours;}
