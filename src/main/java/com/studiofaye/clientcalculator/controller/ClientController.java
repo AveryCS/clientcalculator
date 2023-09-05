@@ -22,13 +22,9 @@ public class ClientController {
     //Add new client
     @PostMapping("/addClient")
     public Client addClient(@RequestBody Client newClient){
-        System.out.println(newClient);
+        System.out.println(newClient.toString());
        Client tempClient = clientRepo.save(newClient);
-
       return tempClient;
-
-
-
     }
 
     //Get current client
@@ -43,11 +39,11 @@ public class ClientController {
 //    @PatchMapping("/updateClientInfo/hours/{id}/")
 //    public ResponseEntity<Client> updateClientHours(@PathVariable long id, int hours){
 //
-//       // Client newClient = database.findById.get()
-//        //newClient.updateHours
-//        //clientRepo.save
-//        // return newClient
-//
+//        Client newClient = database.findById.get()
+//        newClient.updateHours
+//        clientRepo.save
+//         return newClient
+
 //    }
 
     //update Revenue
