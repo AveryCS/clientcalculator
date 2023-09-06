@@ -2,7 +2,9 @@ package com.studiofaye.clientcalculator.controller;
 
 import com.studiofaye.clientcalculator.entities.Client;
 import com.studiofaye.clientcalculator.repos.ClientRepository;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,11 +22,17 @@ public class ClientController {
     }
 
     //Add new client
-    @PostMapping("/addClient")
-    public Client addClient(@RequestBody Client newClient){
-        System.out.println(newClient.toString());
-       Client tempClient = clientRepo.save(newClient);
-      return tempClient;
+    @PostMapping("/client")
+    public ResponseEntity<Client> addClient(@RequestBody Client newClient){
+        //TODO(ASmith) is there a way to not iterate over the client repo / find by a specific field for a faster lookup
+        for(Client client :clientRepo.findAll()){
+            if(client.getEmail().equalsIgnoreCase(newClient.getEmail())){
+                //TODO(ASmith) how do I handle these exceptions in a more RESTful way?
+                throw new RuntimeException("Client is already in database");
+            }
+        }
+       Client savedClient = clientRepo.save(newClient);
+      return ResponseEntity.ok().body(savedClient);
     }
 
     //Get current client

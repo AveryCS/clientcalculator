@@ -13,6 +13,7 @@ public class Client {
     private String name;
     private int hours;
     private float yearlyRevenue;
+    private String email;
 
     public Client(){}
 
@@ -56,5 +57,13 @@ public class Client {
 
     public void setYearlyRevenue(float yearlyRevenue) {
         this.yearlyRevenue = yearlyRevenue;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
