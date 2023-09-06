@@ -1,5 +1,6 @@
 package com.studiofaye.clientcalculator.controller;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.studiofaye.clientcalculator.entities.Client;
 import com.studiofaye.clientcalculator.repos.ClientRepository;
 import org.apache.coyote.Response;
@@ -51,15 +52,19 @@ public class ClientController {
 
     //Update client
     //Update Hours
-//    @PatchMapping("/updateClientInfo/hours/{id}/")
-//    public ResponseEntity<Client> updateClientHours(@PathVariable long id, int hours){
-//
-//        Client newClient = database.findById.get()
-//        newClient.updateHours
-//        clientRepo.save
-//         return newClient
+    @PatchMapping("/client/{id}")
+    public ResponseEntity<Client> updateClientHours(@PathVariable long id, @RequestParam int hours){
 
-//    }
+        Optional<Client> maybeClient= clientRepo.findById(id);
+        if(maybeClient.isPresent()){
+            Client updatedClient = maybeClient.get();
+            updatedClient .updateHours(hours);
+            clientRepo.save(updatedClient );
+            return ResponseEntity.ok(updatedClient );
+        }
+        //TODO(ASmith) My curl request isn't returning a 404 not found error in the terminal. Look into why
+            return ResponseEntity.notFound().build();
+    }
 
     //update Revenue
 //    @PatchMapping("/updateClientInfo/yearlyRevenue/{id}/")

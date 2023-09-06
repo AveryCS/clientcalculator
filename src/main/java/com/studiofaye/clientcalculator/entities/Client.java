@@ -23,9 +23,9 @@ public class Client {
         return name + " "+ String.valueOf(hours)+ " "+ String.valueOf(yearlyRevenue);
     }
 
-    public void updateName(String updatedName){name = updatedName;}
+    public void updateName(String updatedName){this.name = updatedName;}
 
-    public void updateHours(int updatedHours){ hours = updatedHours;}
+    public void updateHours(int updatedHours){ this.hours = updatedHours;}
 
     public long getId() {
         return id;
