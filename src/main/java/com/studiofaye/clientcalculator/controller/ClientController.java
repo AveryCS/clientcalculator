@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 public class ClientController {
     @Autowired
@@ -32,13 +34,18 @@ public class ClientController {
             }
         }
        Client savedClient = clientRepo.save(newClient);
-      return ResponseEntity.ok().body(savedClient);
+      return ResponseEntity.ok(savedClient);
     }
 
     //Get current client
-    @GetMapping("/getClientInfo/{id}")
-    public String getSingleClient(@PathVariable long id){
-        return "Show info for " + id; //+ database.findById() name and all other info
+    @GetMapping("/client/{id}")
+    public ResponseEntity<Client> getSingleClient(@PathVariable long id){
+       Optional <Client> maybeClient = clientRepo.findById(id);
+       if( maybeClient.isPresent()){
+           Client existingClient = maybeClient.get();
+           return ResponseEntity.ok(existingClient);
+       }
+        return ResponseEntity.notFound().build();
 
     }
 
