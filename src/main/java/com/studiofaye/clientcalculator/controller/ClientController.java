@@ -107,7 +107,7 @@ public class ClientController {
     }
 
     //Delete client
-    @DeleteMapping("/client/{id}/delete")
+    @DeleteMapping("/client/{id}")
             public void deleteClient(@PathVariable long id){
         Optional<Client> maybeClient = clientRepo.findById(id);
         if(maybeClient.isPresent()){
@@ -119,7 +119,13 @@ public class ClientController {
         throw new NoSuchElementException("Element does not exist in the database");
     }
 
+    //Show list of all clients
+    @GetMapping("/clients")
+    public ResponseEntity<Iterable<Client>> getAllClients(){
+        Iterable<Client>  clientList = clientRepo.findAll();
+        return   ResponseEntity.ok(clientList);
 
+    }
 
     //Search clients by rating
     //@GetMapping(/"searchByRating")
@@ -127,8 +133,7 @@ public class ClientController {
 
 
 
-    //Show list of all clients
-    //@GetMapping("/showAllClientInfo")
+
 
     //add client
 
