@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -105,13 +106,26 @@ public class ClientController {
         return ResponseEntity.notFound().build();
     }
 
+    //Delete client
+    @DeleteMapping("/client/{id}/delete")
+            public void deleteClient(@PathVariable long id){
+        Optional<Client> maybeClient = clientRepo.findById(id);
+        if(maybeClient.isPresent()){
+            Client clientToDelete = maybeClient.get();
+            clientRepo.delete(clientToDelete);
+            clientRepo.deleteById(id);
+            return;
+        }
+        throw new NoSuchElementException("Element does not exist in the database");
+    }
+
+
 
     //Search clients by rating
     //@GetMapping(/"searchByRating")
 
 
-    //Delete client
-    //@DeleteMapping("/deleteClient)
+
 
     //Show list of all clients
     //@GetMapping("/showAllClientInfo")
