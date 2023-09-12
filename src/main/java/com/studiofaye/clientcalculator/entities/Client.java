@@ -68,4 +68,12 @@ public class Client {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public int getEaseToWorkWith() {
+        return easeToWorkWith;
+    }
+
+    public void setEaseToWorkWith(int easeToWorkWith) {
+        this.easeToWorkWith = easeToWorkWith;
+    }
 }
