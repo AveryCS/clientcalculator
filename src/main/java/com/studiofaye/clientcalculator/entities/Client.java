@@ -28,6 +28,7 @@ public class Client {
 
     public void updateHours(int updatedHours){ this.hours = updatedHours;}
     public void updateYearlyRevenue(float updatedYearlyRevenue){ this.yearlyRevenue = updatedYearlyRevenue;}
+    public void updateEaseToWorkWith(int updatedEaseToWorkWith){ this.easeToWorkWith = updatedEaseToWorkWith;}
 
     public long getId() {
         return id;

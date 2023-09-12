@@ -92,6 +92,19 @@ public class ClientController {
         return ResponseEntity.notFound().build();
     }
 
+    //updateEaseToWorkWith
+    @PatchMapping("/client/{id}/easeToWorkWith/{easeToWorkWith}")
+    public ResponseEntity<Client> updateEaseToWorkWith(@PathVariable long id, @PathVariable int easeToWorkWith){
+        Optional<Client> maybeClient = clientRepo.findById(id);
+        if(maybeClient.isPresent()){
+            Client updatedClient = maybeClient.get();
+            updatedClient.updateEaseToWorkWith(easeToWorkWith);
+            clientRepo.save(updatedClient);
+            return ResponseEntity.ok(updatedClient);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 
     //Search clients by rating
     //@GetMapping(/"searchByRating")
