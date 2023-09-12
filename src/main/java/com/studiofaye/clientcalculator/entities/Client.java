@@ -14,6 +14,7 @@ public class Client {
     private int hours;
     private float yearlyRevenue;
     private String email;
+    private int easeToWorkWith;
 
     public Client(){}
 

@@ -77,10 +77,21 @@ public class ClientController {
             return ResponseEntity.ok(updatedClient);
         }
         return ResponseEntity.notFound().build();
-
-
-
     }
+
+    //updateName
+    @PatchMapping("/client/{id}/name/{name}")
+    public ResponseEntity<Client> updateName(@PathVariable long id, @PathVariable String name){
+        Optional<Client> maybeClient = clientRepo.findById(id);
+        if(maybeClient.isPresent()){
+            Client updatedClient = maybeClient.get();
+            updatedClient.updateName(name);
+            clientRepo.save(updatedClient);
+            return ResponseEntity.ok(updatedClient);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 
     //Search clients by rating
     //@GetMapping(/"searchByRating")
