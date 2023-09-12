@@ -51,9 +51,9 @@ public class ClientController {
     }
 
     //Update client
-    //Update Hours
-    @PatchMapping("/client/{id}")
-    public ResponseEntity<Client> updateClientHours(@PathVariable long id, @RequestParam int hours){
+    //Update hours
+    @PatchMapping("/client/{id}/hours/{hours}")
+    public ResponseEntity<Client> updateClientHours(@PathVariable long id, @PathVariable int hours){
 
         Optional<Client> maybeClient= clientRepo.findById(id);
         if(maybeClient.isPresent()){
@@ -67,11 +67,20 @@ public class ClientController {
     }
 
     //update Revenue
-//    @PatchMapping("/updateClientInfo/yearlyRevenue/{id}/")
-//    public ResponseEntity<Client> updaterevenue(@PathVariable long id, float updatedRevenue){
-//
-//
-//    }
+    @PatchMapping("/client/{id}/revenue/{revenue}")
+    public ResponseEntity<Client> updateRevenue(@PathVariable long id, @PathVariable float revenue){
+        Optional<Client> maybeClient = clientRepo.findById(id);
+        if(maybeClient.isPresent()){
+            Client updatedClient = maybeClient.get();
+            updatedClient.updateYearlyRevenue(revenue);
+            clientRepo.save(updatedClient);
+            return ResponseEntity.ok(updatedClient);
+        }
+        return ResponseEntity.notFound().build();
+
+
+
+    }
 
     //Search clients by rating
     //@GetMapping(/"searchByRating")

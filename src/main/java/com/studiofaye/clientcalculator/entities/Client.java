@@ -26,6 +26,7 @@ public class Client {
     public void updateName(String updatedName){this.name = updatedName;}
 
     public void updateHours(int updatedHours){ this.hours = updatedHours;}
+    public void updateYearlyRevenue(float updatedYearlyRevenue){ this.yearlyRevenue = updatedYearlyRevenue;}
 
     public long getId() {
         return id;
