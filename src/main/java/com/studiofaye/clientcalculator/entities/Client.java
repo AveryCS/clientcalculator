@@ -11,24 +11,35 @@ public class Client {
     @GeneratedValue
     private long id;
     private String name;
-    private int hours;
-    private float yearlyRevenue;
+    private int hoursBookedPerYear;
+    private float hourlyRate;
     private String email;
     private int easeToWorkWith;
 
     public Client(){}
+    public float getHourlyRate() {
+        return hourlyRate;
+    }
 
+    public void setHourlyRate(float hourlyRate) {
+        this.hourlyRate = hourlyRate;
+    }
+    public int getHoursBookedPerYear() {
+        return hoursBookedPerYear;
+    }
 
+    public void setHoursBookedPerYear(int hoursBookedPerYear) {
+        this.hoursBookedPerYear = hoursBookedPerYear;
+    }
 
     public String toString(){
-        return name + " "+ String.valueOf(hours)+ " "+ String.valueOf(yearlyRevenue);
+        return name + " "+ String.valueOf(hoursBookedPerYear)+ " "+ String.valueOf(hourlyRate);
     }
 
     public void updateName(String updatedName){this.name = updatedName;}
-
-    public void updateHours(int updatedHours){ this.hours = updatedHours;}
-    public void updateYearlyRevenue(float updatedYearlyRevenue){ this.yearlyRevenue = updatedYearlyRevenue;}
+    public void updateHourlyRate(float updatedHourlyRate){ this.hourlyRate = updatedHourlyRate;}
     public void updateEaseToWorkWith(int updatedEaseToWorkWith){ this.easeToWorkWith = updatedEaseToWorkWith;}
+    public void updateHoursBookedPerYear(int updatedHoursBookedPerYear){this.hoursBookedPerYear = updatedHoursBookedPerYear;}
 
     public long getId() {
         return id;
@@ -45,23 +56,6 @@ public class Client {
     public void setName(String name) {
         this.name = name;
     }
-
-    public int getHours() {
-        return hours;
-    }
-
-    public void setHours(int hours) {
-        this.hours = hours;
-    }
-
-    public float getYearlyRevenue() {
-        return yearlyRevenue;
-    }
-
-    public void setYearlyRevenue(float yearlyRevenue) {
-        this.yearlyRevenue = yearlyRevenue;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -77,4 +71,8 @@ public class Client {
     public void setEaseToWorkWith(int easeToWorkWith) {
         this.easeToWorkWith = easeToWorkWith;
     }
+
+//    public int calculateClientRating(){
+//
+//    }
 }

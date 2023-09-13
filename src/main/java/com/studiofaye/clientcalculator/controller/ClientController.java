@@ -52,14 +52,14 @@ public class ClientController {
     }
 
     //Update client
-    //Update hours
-    @PatchMapping("/client/{id}/hours/{hours}")
-    public ResponseEntity<Client> updateClientHours(@PathVariable long id, @PathVariable int hours){
+    //Update hoursBookedPerYear
+    @PatchMapping("/client/{id}/hoursBookedPerYear/{hoursBookedPerYear}")
+    public ResponseEntity<Client> updateClientHours(@PathVariable long id, @PathVariable int hoursBookedPerYear){
 
         Optional<Client> maybeClient= clientRepo.findById(id);
         if(maybeClient.isPresent()){
             Client updatedClient = maybeClient.get();
-            updatedClient .updateHours(hours);
+            updatedClient.updateHoursBookedPerYear(hoursBookedPerYear);
             clientRepo.save(updatedClient );
             return ResponseEntity.ok(updatedClient );
         }
@@ -67,13 +67,13 @@ public class ClientController {
             return ResponseEntity.notFound().build();
     }
 
-    //update Revenue
-    @PatchMapping("/client/{id}/revenue/{revenue}")
-    public ResponseEntity<Client> updateRevenue(@PathVariable long id, @PathVariable float revenue){
+    //update hourlyRate
+    @PatchMapping("/client/{id}/hourlyRate/{hourlyRate}")
+    public ResponseEntity<Client> updateRevenue(@PathVariable long id, @PathVariable float hourlyRate){
         Optional<Client> maybeClient = clientRepo.findById(id);
         if(maybeClient.isPresent()){
             Client updatedClient = maybeClient.get();
-            updatedClient.updateYearlyRevenue(revenue);
+            updatedClient.updateHourlyRate(hourlyRate);
             clientRepo.save(updatedClient);
             return ResponseEntity.ok(updatedClient);
         }
