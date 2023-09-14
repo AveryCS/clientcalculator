@@ -15,6 +15,15 @@ public class Client {
     private float hourlyRate;
     private String email;
     private int easeToWorkWith;
+    private int clientRating;
+
+    public int getClientRating() {
+        return clientRating;
+    }
+
+    public void setClientRating(int clientRating) {
+        this.clientRating = clientRating;
+    }
 
     public Client(){}
     public float getHourlyRate() {
