@@ -1,5 +1,8 @@
 package com.studiofaye.clientcalculator.calculators;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class PercentilePointsCalculator {
 
     public PercentilePointsCalculator() {
@@ -13,8 +16,8 @@ public class PercentilePointsCalculator {
             return 10;
         }
         // Calculate the output value n based on the decile scale
-        double range = 60.0 - 30.0;
-        int n = (int) Math.ceil((itemBeingCalculated - 30) / (range / 10.0));
+        double range = max - min;
+        int n = (int) Math.ceil((itemBeingCalculated - min) / (range / 10.0));
 
         // Ensure n is within the range [1, 10]
         n = Math.max(1, Math.min(10, n));

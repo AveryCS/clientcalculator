@@ -12,7 +12,7 @@ public class Client {
     private long id;
     private String name;
     private int hoursBookedPerYear;
-    private float hourlyRate;
+    private int hourlyRate;
     private String email;
     private int easeToWorkWith;
     private int clientRating;
@@ -26,11 +26,11 @@ public class Client {
     }
 
     public Client(){}
-    public float getHourlyRate() {
+    public int getHourlyRate() {
         return hourlyRate;
     }
 
-    public void setHourlyRate(float hourlyRate) {
+    public void setHourlyRate(int hourlyRate) {
         this.hourlyRate = hourlyRate;
     }
     public int getHoursBookedPerYear() {
@@ -46,7 +46,7 @@ public class Client {
     }
 
     public void updateName(String updatedName){this.name = updatedName;}
-    public void updateHourlyRate(float updatedHourlyRate){ this.hourlyRate = updatedHourlyRate;}
+    public void updateHourlyRate(int updatedHourlyRate){ this.hourlyRate = updatedHourlyRate;}
     public void updateEaseToWorkWith(int updatedEaseToWorkWith){ this.easeToWorkWith = updatedEaseToWorkWith;}
     public void updateHoursBookedPerYear(int updatedHoursBookedPerYear){this.hoursBookedPerYear = updatedHoursBookedPerYear;}
 

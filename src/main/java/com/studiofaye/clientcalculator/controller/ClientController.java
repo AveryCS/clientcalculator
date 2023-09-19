@@ -1,4 +1,5 @@
 package com.studiofaye.clientcalculator.controller;
+import com.studiofaye.clientcalculator.calculators.ClientRatingCalculator;
 import com.studiofaye.clientcalculator.entities.Client;
 import com.studiofaye.clientcalculator.repos.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,9 @@ import java.util.Optional;
 public class ClientController {
     @Autowired
     private ClientRepository clientRepo;
+
+    @Autowired
+    private ClientRatingCalculator clientCalc;
 
     public ClientController(){}
 
@@ -64,7 +68,7 @@ public class ClientController {
 
     //update hourlyRate
     @PatchMapping("/client/{id}/hourlyRate/{hourlyRate}")
-    public ResponseEntity<Client> updateRevenue(@PathVariable long id, @PathVariable float hourlyRate){
+    public ResponseEntity<Client> updateRevenue(@PathVariable long id, @PathVariable int hourlyRate){
         Optional<Client> maybeClient = clientRepo.findById(id);
         if(maybeClient.isPresent()){
             Client updatedClient = maybeClient.get();
@@ -121,6 +125,21 @@ public class ClientController {
         return   ResponseEntity.ok(clientList);
 
     }
+
+    //create client rating
+    @GetMapping("/client/{id}/rating")
+    public int getClientRating(@PathVariable long id){
+        Optional<Client> maybeClient = clientRepo.findById(id);
+        if(maybeClient.isPresent()){
+            Client currentClient = maybeClient.get();
+            return clientCalc.calculateClientRating(currentClient);
+        }
+            System.out.println("client does not exist in the database");
+            return 0;
+    }
+
+
+    //update client with client rating
 
     //Search clients by rating
     //@GetMapping(/"searchByRating")
