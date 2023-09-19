@@ -3,10 +3,11 @@ import com.studiofaye.clientcalculator.calculators.ClientRatingCalculator;
 import com.studiofaye.clientcalculator.entities.Client;
 import com.studiofaye.clientcalculator.repos.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+
+import java.util.*;
 
 @RestController
 public class ClientController {
@@ -127,23 +128,22 @@ public class ClientController {
 
     }
 
-    //create client rating
-    @GetMapping("/client/{id}/rating")
-    public int getClientRating(@PathVariable long id){
-        Optional<Client> maybeClient = clientRepo.findById(id);
-        if(maybeClient.isPresent()){
-            Client currentClient = maybeClient.get();
-            return clientCalc.calculateClientRating(currentClient);
-        }
-            System.out.println("client does not exist in the database");
-            return 0;
-    }
-
-
-    //update client with client rating
 
     //Search clients by rating
-    //@GetMapping(/"searchByRating")
+    @GetMapping("/clients/{rating}")
+    public ResponseEntity<List<String>> getAllClientsByRating(@PathVariable int rating){
+        Iterable<Client>  clientList = clientRepo.findAll();
+        List<String> clientListByRating = new ArrayList<>();
+        for(Client client : clientList){
+            if(client.getClientRating() == rating){
+                clientListByRating.add(client.getName());
+            }
+        }
+
+        return   clientListByRating.isEmpty() ? ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(Collections.singletonList("There are no clients with a client rating of "+ rating + " in the database.")) :ResponseEntity.ok(clientListByRating);
+
+    }
 
 
 
