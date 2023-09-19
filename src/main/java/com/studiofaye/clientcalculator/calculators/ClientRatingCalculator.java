@@ -14,12 +14,9 @@ public class ClientRatingCalculator {
     public ClientRatingCalculator() {
     }
 
-
-
     public int calculateClientRating(Client client){
         int hourlyRatePoints = percentileCalculator.mapValueToNumber(client.getHourlyRate(), 30,60);
         int hoursBookedPerYearPoints = percentileCalculator.mapValueToNumber(client.getHoursBookedPerYear(), 0,100);
-
         int result = (int) Math.round((client.getEaseToWorkWith()*.60) + (hourlyRatePoints *.25)+ (hoursBookedPerYearPoints*.15));
           return result;
     }

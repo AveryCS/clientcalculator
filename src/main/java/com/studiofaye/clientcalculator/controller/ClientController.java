@@ -44,6 +44,7 @@ public class ClientController {
                 throw new RuntimeException("Client is already in database");
             }
         }
+        newClient.setClientRating(clientCalc.calculateClientRating(newClient));
        Client savedClient = clientRepo.save(newClient);
       return ResponseEntity.ok(savedClient);
     }
