@@ -131,26 +131,30 @@ public class ClientController {
 
     //Search clients by rating
     @GetMapping("/clients/{rating}")
-    public ResponseEntity<List<String>> getAllClientsByRating(@PathVariable int rating){
-        Iterable<Client>  clientList = clientRepo.findAll();
-        List<String> clientListByRating = new ArrayList<>();
-        for(Client client : clientList){
-            if(client.getClientRating() == rating){
-                clientListByRating.add(client.getName());
-            }
-        }
+    public ResponseEntity<List<String>> getAllClientsByRating(@PathVariable int rating) {
+        //TODO see if I can query the database, rather than iterating over the clientRepo
+        List<String> list = new ArrayList<>();
 
-        return   clientListByRating.isEmpty() ? ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(Collections.singletonList("There are no clients with a client rating of "+ rating + " in the database.")) :ResponseEntity.ok(clientListByRating);
+        for(Client c: clientRepo.findByClientRating(rating) ){
+            list.add(c.getName());
+        }
+        return list.isEmpty() ? ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonList("There are no clients with a client rating of " + rating + " in the database.")) : ResponseEntity.ok(list);
 
     }
+    
+//        Iterable<Client>  clientList = clientRepo.findAll();
+//        List<String> clientListByRating = new ArrayList<>();
+//        for(Client client : clientList){
+//            if(client.getClientRating() == rating){
+//                clientListByRating.add(client.getName());
+//            }
+//        }
+//
+//        return   clientListByRating.isEmpty() ? ResponseEntity.status(HttpStatus.NOT_FOUND)
+//                .body(Collections.singletonList("There are no clients with a client rating of "+ rating + " in the database.")) :ResponseEntity.ok(clientListByRating);
+//    }
 
 
-
-
-
-
-    //add client
 
 
 
