@@ -121,42 +121,25 @@ public class ClientController {
     }
 
     //Show list of all clients
-    @GetMapping("/clients")
-    public ResponseEntity<Iterable<Client>> getAllClients(){
-        Iterable<Client>  clientList = clientRepo.findAll();
-        return   ResponseEntity.ok(clientList);
-
-    }
-
-
-    //Search clients by rating
-    @GetMapping("/clients/{rating}")
-    public ResponseEntity<List<String>> getAllClientsByRating(@PathVariable int rating) {
-        //TODO see if I can query the database, rather than iterating over the clientRepo
-        List<String> list = new ArrayList<>();
-
-        for(Client c: clientRepo.findByClientRating(rating) ){
-            list.add(c.getName());
-        }
-        return list.isEmpty() ? ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonList("There are no clients with a client rating of " + rating + " in the database.")) : ResponseEntity.ok(list);
-
-    }
-    
+//    @GetMapping("/clients")
+//    public ResponseEntity<Iterable<Client>> getAllClients(){
 //        Iterable<Client>  clientList = clientRepo.findAll();
-//        List<String> clientListByRating = new ArrayList<>();
-//        for(Client client : clientList){
-//            if(client.getClientRating() == rating){
-//                clientListByRating.add(client.getName());
-//            }
-//        }
+//        return   ResponseEntity.ok(clientList);
 //
-//        return   clientListByRating.isEmpty() ? ResponseEntity.status(HttpStatus.NOT_FOUND)
-//                .body(Collections.singletonList("There are no clients with a client rating of "+ rating + " in the database.")) :ResponseEntity.ok(clientListByRating);
 //    }
 
 
+    //Search clients by rating
+    @GetMapping("/clients")
+    public ResponseEntity<List<Client>> getAllClientsByRating(@RequestParam(required = false) Integer rating) {
+        //TODO see if I can query the database, rather than iterating over the clientRepo
+        if(rating == null){
+            List<Client> list = new ArrayList<>();
+            return ResponseEntity.ok(list);
+        }
+        List<Client> list = clientRepo.findByClientRating(rating);
+        return ResponseEntity.ok(list);
 
-
-
+    }
 
 }
