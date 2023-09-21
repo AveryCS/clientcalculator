@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface ClientRepository extends CrudRepository<Client, Long> {
     List<Client> findByClientRating(int rating);
-
     List<Client> findAll();
+    boolean existsByEmailIgnoreCase(String email);
 
 
 
