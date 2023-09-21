@@ -6,11 +6,13 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ClientRepository extends CrudRepository<Client, Long> {
     List<Client> findByClientRating(int rating);
     List<Client> findAll();
     boolean existsByEmailIgnoreCase(String email);
+
 
 
 

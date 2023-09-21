@@ -37,7 +37,6 @@ public class ClientController {
     //Add new client
     @PostMapping("/client")
     public ResponseEntity<Client> addClient(@RequestBody Client newClient) {
-        //TODO(ASmith) is there a way to not iterate over the client repo / find by a specific field for a faster lookup
         if (clientRepo.existsByEmailIgnoreCase(newClient.getEmail())) {
             throw new RuntimeException("Client is already in database");
         }
@@ -46,8 +45,6 @@ public class ClientController {
         return ResponseEntity.ok(savedClient);
     }
 
-
-    //Update client
     //Update hoursBookedPerYear
     @PatchMapping("/client/{id}/hoursBookedPerYear/{hoursBookedPerYear}")
     public ResponseEntity<Client> updateClientHours(@PathVariable long id, @PathVariable int hoursBookedPerYear) {
@@ -63,6 +60,7 @@ public class ClientController {
         return ResponseEntity.notFound().build();
     }
 
+    //TODO ADD A @TRANSACTIONAL ANNOTATION AND LEARN ABOUT IT
     //update hourlyRate
     @PatchMapping("/client/{id}/hourlyRate/{hourlyRate}")
     public ResponseEntity<Client> updateRevenue(@PathVariable long id, @PathVariable int hourlyRate) {
@@ -106,8 +104,8 @@ public class ClientController {
     @DeleteMapping("/client/{id}")
     //TODO RETURN THE CLIENT THAT WAS JUST DELETED
     public void deleteClient(@PathVariable long id) {
-        clientRepo.deleteById(id);
-        return;
+       clientRepo.deleteById(id);
+      return ;
     }
 
     //Show list of all clients
