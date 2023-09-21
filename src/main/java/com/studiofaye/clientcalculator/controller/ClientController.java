@@ -28,11 +28,8 @@ public class ClientController {
     @GetMapping("/client/{id}")
     public ResponseEntity<Client> getSingleClient(@PathVariable long id){
         Optional <Client> maybeClient = clientRepo.findById(id);
-        if( maybeClient.isPresent()){
-            Client existingClient = maybeClient.get();
-            return ResponseEntity.ok(existingClient);
-        }
-        return ResponseEntity.notFound().build();
+
+        return maybeClient.isPresent() ? ResponseEntity.ok(maybeClient.get()): ResponseEntity.notFound().build();
     }
 
     //Add new client
