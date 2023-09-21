@@ -109,15 +109,10 @@ public class ClientController {
 
     //Delete client
     @DeleteMapping("/client/{id}")
+    //TODO RETURN THE CLIENT THAT WAS JUST DELETED
             public void deleteClient(@PathVariable long id){
-        Optional<Client> maybeClient = clientRepo.findById(id);
-        if(maybeClient.isPresent()){
-            Client clientToDelete = maybeClient.get();
-            clientRepo.delete(clientToDelete);
             clientRepo.deleteById(id);
             return;
-        }
-        throw new NoSuchElementException("Element does not exist in the database");
     }
 
     //Show list of all clients
