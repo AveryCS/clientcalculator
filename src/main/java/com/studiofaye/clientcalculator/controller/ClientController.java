@@ -131,11 +131,13 @@ public class ClientController {
 
     //Search clients by rating
     @GetMapping("/clients")
+    //TODO Look back over this and better understand @RequestParam
     public ResponseEntity<List<Client>> getAllClientsByRating(@RequestParam(required = false) Integer rating) {
         //TODO see if I can query the database, rather than iterating over the clientRepo
         if(rating == null){
-            List<Client> list = new ArrayList<>();
-            return ResponseEntity.ok(list);
+
+       return   ResponseEntity.ok(clientRepo.findAll());
+
         }
         List<Client> list = clientRepo.findByClientRating(rating);
         return ResponseEntity.ok(list);

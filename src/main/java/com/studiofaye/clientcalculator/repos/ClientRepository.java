@@ -9,7 +9,15 @@ import java.util.List;
 
 public interface ClientRepository extends CrudRepository<Client, Long> {
     List<Client> findByClientRating(int rating);
+
+    List<Client> findAll();
+
+
+
 }
+
+
+
 //    @Query("SELECT client.clientRating FROM Client client WHERE client.clientRating = :specificValue")
 //    List<String> findByClientRating(@Param("specificValue") int specificValue);
 //}
