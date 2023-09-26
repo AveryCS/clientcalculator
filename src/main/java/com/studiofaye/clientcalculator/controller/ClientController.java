@@ -106,18 +106,15 @@ public class ClientController {
     //Delete client
     @DeleteMapping("/client/{id}")
     //TODO RETURN THE CLIENT THAT WAS JUST DELETED
-    public void deleteClient(@PathVariable long id) {
-       clientRepo.deleteById(id);
-      return ;
+    public ResponseEntity<Client> deleteClient(@PathVariable long id) {
+       Optional<Client> maybeClient = clientRepo.findById(id);
+       if(maybeClient.isPresent()){
+           Client deletedClient = maybeClient.get();
+           clientRepo.delete(deletedClient);
+           return ResponseEntity.ok(deletedClient);
+       }
+      return ResponseEntity.notFound().build() ;
     }
-
-    //Show list of all clients
-//    @GetMapping("/clients")
-//    public ResponseEntity<Iterable<Client>> getAllClients(){
-//        Iterable<Client>  clientList = clientRepo.findAll();
-//        return   ResponseEntity.ok(clientList);
-//
-//    }
 
 
     //Search clients by rating
