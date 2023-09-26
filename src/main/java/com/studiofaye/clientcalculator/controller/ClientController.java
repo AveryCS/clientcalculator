@@ -53,8 +53,10 @@ public class ClientController {
         if (maybeClient.isPresent()) {
             Client updatedClient = maybeClient.get();
             updatedClient.updateHoursBookedPerYear(hoursBookedPerYear);
-            clientRepo.save(updatedClient);
-            return ResponseEntity.ok(updatedClient);
+            updatedClient.setClientRating(clientCalc.calculateClientRating(updatedClient));
+            Client savedClient = clientRepo.save(updatedClient);
+            clientRepo.save(savedClient);
+            return ResponseEntity.ok(savedClient);
         }
         //FIXED (ASmith) My curl request isn't returning a 404 not found error in the terminal. Look into why
         return ResponseEntity.notFound().build();
@@ -69,8 +71,10 @@ public class ClientController {
         if (maybeClient.isPresent()) {
             Client updatedClient = maybeClient.get();
             updatedClient.updateHourlyRate(hourlyRate);
-            clientRepo.save(updatedClient);
-            return ResponseEntity.ok(updatedClient);
+            updatedClient.setClientRating(clientCalc.calculateClientRating(updatedClient));
+            Client savedClient = clientRepo.save(updatedClient);
+            clientRepo.save(savedClient);
+            return ResponseEntity.ok(savedClient);
         }
         return ResponseEntity.notFound().build();
     }
@@ -97,15 +101,17 @@ public class ClientController {
         if (maybeClient.isPresent()) {
             Client updatedClient = maybeClient.get();
             updatedClient.updateEaseToWorkWith(easeToWorkWith);
-            clientRepo.save(updatedClient);
-            return ResponseEntity.ok(updatedClient);
+            updatedClient.setClientRating(clientCalc.calculateClientRating(updatedClient));
+            Client savedClient = clientRepo.save(updatedClient);
+            clientRepo.save(savedClient);
+            return ResponseEntity.ok(savedClient);
         }
         return ResponseEntity.notFound().build();
     }
 
     //Delete client
     @DeleteMapping("/client/{id}")
-    //TODO RETURN THE CLIENT THAT WAS JUST DELETED
+    //FIXED RETURN THE CLIENT THAT WAS JUST DELETED
     public ResponseEntity<Client> deleteClient(@PathVariable long id) {
        Optional<Client> maybeClient = clientRepo.findById(id);
        if(maybeClient.isPresent()){
@@ -128,5 +134,4 @@ public class ClientController {
         List<Client> list = clientRepo.findByClientRating(rating);
         return ResponseEntity.ok(list);
     }
-
 }
