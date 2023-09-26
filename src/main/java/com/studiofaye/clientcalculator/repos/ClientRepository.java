@@ -13,9 +13,6 @@ public interface ClientRepository extends CrudRepository<Client, Long> {
     List<Client> findAll();
     boolean existsByEmailIgnoreCase(String email);
 
-
-
-
 }
 
 

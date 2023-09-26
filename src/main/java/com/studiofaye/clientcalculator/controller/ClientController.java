@@ -6,6 +6,7 @@ import com.studiofaye.clientcalculator.repos.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -30,7 +31,6 @@ public class ClientController {
     @GetMapping("/client/{id}")
     public ResponseEntity<Client> getSingleClient(@PathVariable long id) {
         Optional<Client> maybeClient = clientRepo.findById(id);
-
         return maybeClient.isPresent() ? ResponseEntity.ok(maybeClient.get()) : ResponseEntity.notFound().build();
     }
 
@@ -46,9 +46,9 @@ public class ClientController {
     }
 
     //Update hoursBookedPerYear
+    @Transactional
     @PatchMapping("/client/{id}/hoursBookedPerYear/{hoursBookedPerYear}")
     public ResponseEntity<Client> updateClientHours(@PathVariable long id, @PathVariable int hoursBookedPerYear) {
-
         Optional<Client> maybeClient = clientRepo.findById(id);
         if (maybeClient.isPresent()) {
             Client updatedClient = maybeClient.get();
@@ -56,12 +56,13 @@ public class ClientController {
             clientRepo.save(updatedClient);
             return ResponseEntity.ok(updatedClient);
         }
-        //TODO(ASmith) My curl request isn't returning a 404 not found error in the terminal. Look into why
+        //FIXED (ASmith) My curl request isn't returning a 404 not found error in the terminal. Look into why
         return ResponseEntity.notFound().build();
     }
 
-    //TODO ADD A @TRANSACTIONAL ANNOTATION AND LEARN ABOUT IT
+    //FIXED ADD A @TRANSACTIONAL ANNOTATION AND LEARN ABOUT IT
     //update hourlyRate
+    @Transactional
     @PatchMapping("/client/{id}/hourlyRate/{hourlyRate}")
     public ResponseEntity<Client> updateRevenue(@PathVariable long id, @PathVariable int hourlyRate) {
         Optional<Client> maybeClient = clientRepo.findById(id);
@@ -75,6 +76,7 @@ public class ClientController {
     }
 
     //updateName
+    @Transactional
     @PatchMapping("/client/{id}/name/{name}")
     public ResponseEntity<Client> updateName(@PathVariable long id, @PathVariable String name) {
         Optional<Client> maybeClient = clientRepo.findById(id);
@@ -88,6 +90,7 @@ public class ClientController {
     }
 
     //updateEaseToWorkWith
+    @Transactional
     @PatchMapping("/client/{id}/easeToWorkWith/{easeToWorkWith}")
     public ResponseEntity<Client> updateEaseToWorkWith(@PathVariable long id, @PathVariable int easeToWorkWith) {
         Optional<Client> maybeClient = clientRepo.findById(id);
@@ -121,15 +124,12 @@ public class ClientController {
     @GetMapping("/clients")
     //TODO Look back over this and better understand @RequestParam
     public ResponseEntity<List<Client>> getAllClientsByRating(@RequestParam(required = false) Integer rating) {
-        //TODO see if I can query the database, rather than iterating over the clientRepo
+        //FIXED see if I can query the database, rather than iterating over the clientRepo
         if (rating == null) {
-
             return ResponseEntity.ok(clientRepo.findAll());
-
         }
         List<Client> list = clientRepo.findByClientRating(rating);
         return ResponseEntity.ok(list);
-
     }
 
 }
