@@ -15,12 +15,14 @@ public class ClientRatingCalculatorTest {
     @Autowired
     PercentilePointsCalculator percentCalc;
 
+
+    //TODO TEST IS WORKING BUT NEED TO DOUBLE CHECK THE VALUES
     @Test
     public void clientRatingCalculatorTest() {
         Client testClient = new Client();
         testClient.setEaseToWorkWith(10);
-        testClient.setHourlyRate(50);
-        testClient.setHoursBookedPerYear(90);
+        testClient.setHourlyRate(100);
+        testClient.setHoursBookedPerYear(110);
         int rating = clientCalc.calculateClientRating(testClient);
         assertEquals(10, rating);
 
