@@ -4,12 +4,12 @@ import com.studiofaye.clientcalculator.calculators.ClientRatingCalculator;
 import com.studiofaye.clientcalculator.entities.Client;
 import com.studiofaye.clientcalculator.repos.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ClientController {
@@ -113,13 +113,13 @@ public class ClientController {
     @DeleteMapping("/client/{id}")
     //FIXED RETURN THE CLIENT THAT WAS JUST DELETED
     public ResponseEntity<Client> deleteClient(@PathVariable long id) {
-       Optional<Client> maybeClient = clientRepo.findById(id);
-       if(maybeClient.isPresent()){
-           Client deletedClient = maybeClient.get();
-           clientRepo.delete(deletedClient);
-           return ResponseEntity.ok(deletedClient);
-       }
-      return ResponseEntity.notFound().build() ;
+        Optional<Client> maybeClient = clientRepo.findById(id);
+        if (maybeClient.isPresent()) {
+            Client deletedClient = maybeClient.get();
+            clientRepo.delete(deletedClient);
+            return ResponseEntity.ok(deletedClient);
+        }
+        return ResponseEntity.notFound().build();
     }
 
 
