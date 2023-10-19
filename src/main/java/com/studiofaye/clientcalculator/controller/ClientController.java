@@ -4,6 +4,7 @@ import com.studiofaye.clientcalculator.calculators.ClientRatingCalculator;
 import com.studiofaye.clientcalculator.entities.Client;
 import com.studiofaye.clientcalculator.repos.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -39,15 +40,28 @@ public class ClientController {
     }
 
     //Add new client
+//    @PostMapping("/client")
+//    public ResponseEntity<Client> addClient(@RequestBody Client newClient) {
+//        if (clientRepo.existsByEmailIgnoreCase(newClient.getEmail())) {
+//            throw new RuntimeException("Client is already in database");
+//        }
+//        newClient.setClientRating(clientCalc.calculateClientRating(newClient));
+//        Client savedClient = clientRepo.save(newClient);
+//        return ResponseEntity.ok(savedClient);
+//    }
+
     @PostMapping("/client")
     public ResponseEntity<Client> addClient(@RequestBody Client newClient) {
         if (clientRepo.existsByEmailIgnoreCase(newClient.getEmail())) {
-            throw new RuntimeException("Client is already in database");
+            // If the client already exists, return a specific HTTP status code (e.g., 409 Conflict)
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
+
         newClient.setClientRating(clientCalc.calculateClientRating(newClient));
         Client savedClient = clientRepo.save(newClient);
         return ResponseEntity.ok(savedClient);
     }
+
 
     //Update hoursBookedPerYear
     @Transactional
