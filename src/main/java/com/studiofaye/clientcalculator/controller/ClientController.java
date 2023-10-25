@@ -15,7 +15,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173") // Replace with your actual frontend URL
+@CrossOrigin(origins = "http://localhost:5173")
+
 
 public class ClientController {
     @Autowired
