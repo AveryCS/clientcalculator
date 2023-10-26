@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://clientcal-frontend.s3-website.us-east-2.amazonaws.com")
 
 
 public class ClientController {
