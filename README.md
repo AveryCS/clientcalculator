@@ -1,4 +1,5 @@
-![Insights logo (1)](https://github.com/AveryCS/clientcalculator/assets/97619724/915fca49-0a30-49e4-9268-a9268d83fefa)
+
+![Insights logo](https://github.com/AveryCS/clientcalculator/assets/97619724/67f1c527-d24c-4dd7-ace3-c5492917bed9)
 # Project Overview
 
 ### This tool is designed to simplify the process of identifying high-value customers, with at-a-glance insights for targeted marketing efforts.
