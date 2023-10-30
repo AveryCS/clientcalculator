@@ -34,7 +34,7 @@ public class ClientController {
 
     @RequestMapping("/hello")
     public String showAllClientsTemplate() {
-        return "helloooooooo SUCCESS";
+        return "helloooooooo world";
     }
 
     //Get current client

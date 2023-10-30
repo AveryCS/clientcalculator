@@ -13,8 +13,7 @@ public class ClientcalculatorApplicationTests {
 		assertEquals(0,0);
 	}
 
-//	@Test
-//	public void test
+
 
 
 
