@@ -15,7 +15,11 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://clientcal-frontend.s3-website.us-east-2.amazonaws.com")
+//@CrossOrigin(origins = "http://clientcal-frontend.s3-website.us-east-2.amazonaws.com")
+
+@CrossOrigin(origins = {"http://clientcal-frontend.s3-website.us-east-2.amazonaws.com", "http://localhost:5174"})
+
+
 
 
 public class ClientController {

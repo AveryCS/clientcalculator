@@ -10,4 +10,5 @@ public class ClientcalculatorApplication {
 		SpringApplication.run(ClientcalculatorApplication.class, args);
 	}
 
+
 }

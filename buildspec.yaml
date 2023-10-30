@@ -1,0 +1,25 @@
+  —————————
+  version: 0.2
+  phases:
+    install:
+      runtime-versions:
+        java: corretto11
+    pre_build:
+      commands:
+        - echo "In the pre_build phase..."
+        - chmod +x gradlew # Making sure gradlew is executable
+    build:
+      commands:
+        - echo "Running tests on `date`"
+        - ./gradlew test # Run tests using Gradle
+        - echo "Building Spring Boot JAR on `date`"
+        - ./gradlew bootJar # Build the Spring Boot application JAR
+    post_build:
+      commands:
+        - echo "Tests and Jar build completed on `date`"
+  artifacts:
+    files:
+      - build/libs/*.jar # Assuming Spring Boot Gradle plugin outputs JARs to build/libs
+    discard-paths: yes
+    ————————
+
