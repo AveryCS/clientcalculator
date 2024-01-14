@@ -6,7 +6,6 @@
 
 
 # Key Features
-### 💡 Follow this link to view a live demo: client-analytics-studiofaye.com 
 
 ### 💡 Targeted Marketing Insights: Leverage the tool's “client rating” to identify high-value customers, enabling more effective and personalized marketing campaigns. The client rating is on a scale of 1-10, with 1 being the worst and 10 being the best.
 
